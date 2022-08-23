@@ -6,9 +6,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import helpers.FirefoxWebdriver;
 
 public class Base {
-	protected FirefoxWebdriver firefoxDriver;
-	protected WebDriverWait driverWait;
-	protected WebDriver currentDriver;
+	protected final FirefoxWebdriver firefoxDriver;
+	protected final WebDriverWait driverWait;
+	protected final WebDriver currentDriver;
 	
 	public Base() {
 		firefoxDriver = new FirefoxWebdriver();

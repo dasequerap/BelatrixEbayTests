@@ -1,7 +1,8 @@
 package tests;
 
 import java.util.List;
-import org.junit.Assert;
+
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,20 +26,20 @@ public class EbayTests {
 		ebayResultsPage.selectShoesSizeTen();
 		System.out.println(ebayResultsPage.getNumberOfResults());
 		ebayResultsPage.orderByPriceAscendant();
-		results = ebayResultsPage.getTopResults(5);
-		
-		for(int index = 0; index < results.size(); index++) {
-			Assert.assertThat(results.get(index).getItemName().toLowerCase()
-				, containsString("puma"));
-			System.out.println(results.get(index).getItemName());
-			System.out.println(results.get(index).getItemPrice());
+		results = ebayResultsPage.getTopResults();
+
+		for (ProductItem result : results) {
+			MatcherAssert.assertThat(result.getItemName().toLowerCase()
+					, containsString("puma"));
+			System.out.println(result.getItemName());
+			System.out.println(result.getItemPrice());
 		}
 		ebayResultsPage.orderByPriceDescendant();
-		results = ebayResultsPage.getTopResults(5);
-		
-		for(int index = 0; index < results.size(); index++) {
-			System.out.println(results.get(index).getItemName());
-			System.out.println(results.get(index).getItemPrice());
+		results = ebayResultsPage.getTopResults();
+
+		for (ProductItem result : results) {
+			System.out.println(result.getItemName());
+			System.out.println(result.getItemPrice());
 		}
 		
 	}

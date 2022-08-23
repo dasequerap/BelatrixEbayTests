@@ -9,9 +9,9 @@ import pages.EbayResultsPage;
 
 public class EbayHomePage extends Base{
 	
-	private String ebayHomePageUrl;
-	private WebElement SearchTextBox;
-	private WebElement SearchTextButton;
+	private final String ebayHomePageUrl;
+	private final WebElement SearchTextBox;
+	private final WebElement SearchTextButton;
 	
 	public EbayHomePage() {
 		ebayHomePageUrl = "https://www.ebay.com/";

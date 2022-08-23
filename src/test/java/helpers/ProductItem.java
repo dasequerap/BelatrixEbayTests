@@ -1,8 +1,8 @@
 package helpers;
 
 public class ProductItem {
-	private String itemName;
-	private String itemPrice;
+	private final String itemName;
+	private final String itemPrice;
 	
 	public ProductItem(String name, String price) {
 		this.itemName = name;
