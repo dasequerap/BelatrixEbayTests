@@ -5,3 +5,7 @@
 # Maven
 log/
 target/
+#idea
+.idea/
+BelatrixEbayTests.iml
+Sonar.bat
