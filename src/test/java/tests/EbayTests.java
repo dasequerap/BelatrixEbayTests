@@ -2,16 +2,16 @@ package tests;
 
 import java.util.List;
 
-import helpers.FirefoxWebdriver;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import pages.EbayHomePage;
 import pages.EbayResultsPage;
 import helpers.ProductItem;
 
-public class EbayTests {
+class EbayTests {
 	static EbayHomePage ebayHomePage = null;
 	EbayResultsPage ebayResultsPage = null;
 	List<ProductItem> results = null;
@@ -23,7 +23,7 @@ public class EbayTests {
 
 	@Test
     @DisplayName("1. Ebay Test")
-	public void automationExamTest() {
+	void automationExamTest() {
 		ebayHomePage.get();
 		System.out.println(ebayHomePage.getHomePageTitle());
 		ebayResultsPage = ebayHomePage.searchItem("Shoes");
