@@ -1,48 +1,59 @@
 package pages;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.FindBy;
+
+import org.junit.jupiter.api.Assertions;
+
 import pages.EbayResultsPage;
 
 public class EbayHomePage extends Base{
 	
-	private final String ebayHomePageUrl;
-	private final WebElement SearchTextBox;
-	private final WebElement SearchTextButton;
+	private final String ebayHomePageUrl = "https://www.ebay.com/";
+
+	@FindBy(id="gh-ac")
+	private WebElement searchTextBox;
+
+	@FindBy(id="gh-btn")
+	private WebElement searchButton;
 	
 	public EbayHomePage() {
-		ebayHomePageUrl = "https://www.ebay.com/";
-		openEbayHomePage();
-		this.driverWait.until(ExpectedConditions.elementToBeClickable(
-			By.id("gh-ac")));
-		SearchTextBox = this.currentDriver.findElement(By.id("gh-ac"));
-		SearchTextButton = this.currentDriver.findElement(By.id("gh-btn"));
+		PageFactory.initElements(this.getCurrentDriver(), this);
 	}
-	
-	public void openEbayHomePage() {
-		this.openEbayPage(ebayHomePageUrl);
-		this.currentDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+	@Override
+	protected void load() {
+		this.get(ebayHomePageUrl);
+		this.currentDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		//this.driverWait.until(ExpectedConditions.elementToBeClickable(By.id("gh-ac")));
 	}
-	
+
+	@Override
+	protected void isLoaded() throws Error {
+		Assertions.assertTrue(this.getTitle().contains("eBay"));
+	}
+
 	public String getHomePageTitle() {
 		return this.currentDriver.getTitle();
 	}
 	
 	private EbayHomePage enterTextOnSearchBox(String text) {
-		SearchTextBox.sendKeys(text);
+		searchTextBox.sendKeys(text);
 		return this;
 	}
 	
 	private EbayResultsPage clickOnSearchButton() {
-		SearchTextButton.click();
+		searchButton.click();
 		return new EbayResultsPage(this.currentDriver, this.driverWait);
 	}
 
 	public EbayResultsPage searchItem(String text){
 		return enterTextOnSearchBox(text).clickOnSearchButton();
 	}
-	
 }

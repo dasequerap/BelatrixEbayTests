@@ -1,4 +1,5 @@
 package helpers;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -19,7 +20,7 @@ public class FirefoxWebdriver {
 		driver.get(url);
 	}
 	
-	public WebDriverWait getImplicitWait(int timeOut) {
+	public WebDriverWait getImplicitWait(Duration timeOut) {
 		return new WebDriverWait(driver, timeOut);
 	}
 	
