@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import dev.failsafe.internal.util.Assert;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -29,7 +30,7 @@ class EbayTests {
 	void automationExamTest() {
 		ebayHomePage.get();
 		/*ebayResultsPage = ebayHomePage.searchItem("Shoes");
-        /*ebayResultsPage.selectPumaBrand();
+        ebayResultsPage.selectPumaBrand();
 		ebayResultsPage.selectShoesSizeTen();
 		System.out.println(ebayResultsPage.getNumberOfResults());
 		ebayResultsPage.orderByPriceAscendant();

@@ -36,7 +36,7 @@ public abstract class Base extends LoadableComponent<Base> {
 
 	public void get(String url) { this.driver.getUrl(url); }
 
-	public WebDriver getCurrentDriver() { return currentDriver; }
+	public WebDriver getDriver() { return currentDriver; }
 
 	protected void waitPage(){
 		this.currentDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

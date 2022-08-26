@@ -20,7 +20,7 @@ public class EbayHomePage extends Base{
 	
 	public EbayHomePage() throws IOException {
 		super();
-		PageFactory.initElements(this.getCurrentDriver(), this);
+		PageFactory.initElements(this.getDriver(), this);
 	}
 
 	@Override
