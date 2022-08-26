@@ -1,5 +1,7 @@
 package tests;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
@@ -10,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import pages.EbayHomePage;
 import pages.EbayResultsPage;
 import helpers.ProductItem;
+import helpers.PropertiesReader;
 
 class EbayTests {
 	static EbayHomePage ebayHomePage = null;
@@ -17,7 +20,7 @@ class EbayTests {
 	List<ProductItem> results = null;
 
 	@BeforeAll
-	static void setUp(){
+	static void setUp() throws IOException {
 		ebayHomePage = new EbayHomePage();
 	}
 
@@ -25,8 +28,7 @@ class EbayTests {
     @DisplayName("1. Ebay Test")
 	void automationExamTest() {
 		ebayHomePage.get();
-		System.out.println(ebayHomePage.getHomePageTitle());
-		ebayResultsPage = ebayHomePage.searchItem("Shoes");
+		/*ebayResultsPage = ebayHomePage.searchItem("Shoes");
         /*ebayResultsPage.selectPumaBrand();
 		ebayResultsPage.selectShoesSizeTen();
 		System.out.println(ebayResultsPage.getNumberOfResults());

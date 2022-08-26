@@ -1,18 +1,16 @@
 package pages;
 
-import java.time.Duration;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.FindBy;
 
 import org.junit.jupiter.api.Assertions;
 
-import pages.EbayResultsPage;
+import java.io.IOException;
 
 public class EbayHomePage extends Base{
 	
-	private final String ebayHomePageUrl = "https://www.ebay.com/";
+	private final String ebayHomePageUrl = properties.getProperty("homeUrl");
 
 	@FindBy(id="gh-ac")
 	private WebElement searchTextBox;
@@ -20,15 +18,16 @@ public class EbayHomePage extends Base{
 	@FindBy(id="gh-btn")
 	private WebElement searchButton;
 	
-	public EbayHomePage() {
+	public EbayHomePage() throws IOException {
+		super();
 		PageFactory.initElements(this.getCurrentDriver(), this);
 	}
 
 	@Override
 	protected void load() {
 		this.get(ebayHomePageUrl);
-		this.currentDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		//this.driverWait.until(ExpectedConditions.elementToBeClickable(By.id("gh-ac")));
+		this.waitPage();
+		this.waitElementToBeClickable(searchTextBox);
 	}
 
 	@Override
@@ -40,7 +39,7 @@ public class EbayHomePage extends Base{
 		return this.currentDriver.getTitle();
 	}
 	
-	private EbayHomePage enterTextOnSearchBox(String text) {
+	private EbayHomePage typeSearchTerm(String text) {
 		searchTextBox.sendKeys(text);
 		return this;
 	}
@@ -51,6 +50,6 @@ public class EbayHomePage extends Base{
 	}
 
 	public EbayResultsPage searchItem(String text){
-		return enterTextOnSearchBox(text).clickOnSearchButton();
+		return typeSearchTerm(text).clickOnSearchButton();
 	}
 }
