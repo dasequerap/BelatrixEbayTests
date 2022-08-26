@@ -1,33 +1,36 @@
 package tests;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
-import helpers.FirefoxWebdriver;
+import dev.failsafe.internal.util.Assert;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import pages.EbayHomePage;
 import pages.EbayResultsPage;
 import helpers.ProductItem;
+import helpers.PropertiesReader;
 
-public class EbayTests {
+class EbayTests {
 	static EbayHomePage ebayHomePage = null;
 	EbayResultsPage ebayResultsPage = null;
 	List<ProductItem> results = null;
 
 	@BeforeAll
-	static void setUp(){
+	static void setUp() throws IOException {
 		ebayHomePage = new EbayHomePage();
 	}
 
 	@Test
     @DisplayName("1. Ebay Test")
-	public void automationExamTest() {
+	void automationExamTest() {
 		ebayHomePage.get();
-		System.out.println(ebayHomePage.getHomePageTitle());
-		ebayResultsPage = ebayHomePage.searchItem("Shoes");
-        /*ebayResultsPage.selectPumaBrand();
+		/*ebayResultsPage = ebayHomePage.searchItem("Shoes");
+        ebayResultsPage.selectPumaBrand();
 		ebayResultsPage.selectShoesSizeTen();
 		System.out.println(ebayResultsPage.getNumberOfResults());
 		ebayResultsPage.orderByPriceAscendant();
