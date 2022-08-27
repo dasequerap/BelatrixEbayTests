@@ -1,10 +1,10 @@
-package helpers;
+package models;
 
-public class ProductItem {
+public class ProductItemModel {
 	private final String itemName;
 	private final String itemPrice;
 	
-	public ProductItem(String name, String price) {
+	public ProductItemModel(String name, String price) {
 		this.itemName = name;
 		this.itemPrice = price;
 	}
@@ -12,4 +12,5 @@ public class ProductItem {
 	public String getItemName(){ return this.itemName; }
 	
 	public String getItemPrice(){ return this.itemPrice; }
+
 }
