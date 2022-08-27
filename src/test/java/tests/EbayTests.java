@@ -13,20 +13,26 @@ import pages.EbayResultsPage;
 import models.ProductItemModel;
 
 class EbayTests {
-	static EbayHomePage ebayHomePage = null;
-	EbayResultsPage ebayResultsPage = null;
+	//static EbayHomePage ebayHomePage = null;
+	//EbayResultsPage ebayResultsPage = null;
 	//List<ProductItemModel> results = null;
+	ProductItemModel productItem;
 
 	@BeforeAll
 	static void setUp() throws IOException {
-		ebayHomePage = new EbayHomePage();
+		//ebayHomePage = new EbayHomePage();
 	}
 
 	@Test
     @DisplayName("1. Ebay Test")
 	void automationExamTest() {
-		ebayHomePage.get();
-		/*ebayResultsPage = ebayHomePage.searchItem("Shoes");
+		productItem = new ProductItemModel.ProductItemBuilder()
+				.name("puma")
+				.price("20000")
+				.build();
+		System.out.println(productItem.toString());
+		/*ebayHomePage.get();
+		ebayResultsPage = ebayHomePage.searchItem("Shoes");
         ebayResultsPage.selectPumaBrand();
 		ebayResultsPage.selectShoesSizeTen();
 		System.out.println(ebayResultsPage.getNumberOfResults());
@@ -50,6 +56,6 @@ class EbayTests {
 	
 	@AfterAll
 	static void tearDown(){
-		ebayHomePage.quit();
+		//ebayHomePage.quit();
 	}
 }
