@@ -1,10 +1,8 @@
 package tests;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-import dev.failsafe.internal.util.Assert;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -12,13 +10,12 @@ import org.junit.jupiter.api.Test;
 
 import pages.EbayHomePage;
 import pages.EbayResultsPage;
-import helpers.ProductItem;
-import helpers.PropertiesReader;
+import models.ProductItemModel;
 
 class EbayTests {
 	static EbayHomePage ebayHomePage = null;
 	EbayResultsPage ebayResultsPage = null;
-	List<ProductItem> results = null;
+	//List<ProductItemModel> results = null;
 
 	@BeforeAll
 	static void setUp() throws IOException {

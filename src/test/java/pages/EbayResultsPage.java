@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import helpers.ProductItem;
+import models.ProductItemModel;
 
 public class EbayResultsPage{
 	private final WebDriver currentDriver;
@@ -59,19 +59,19 @@ public class EbayResultsPage{
 			By.className("srp-controls__count-heading")).getText();
 	}
 	
-	public List<ProductItem> getTopResults() {
+	/*public List<ProductItemModel> getTopResults() {
 		List<WebElement> itemsList = currentDriver.findElements(
 			By.xpath(resultsLocatorTagXpath));
-		List<ProductItem> productItems = new ArrayList<ProductItem>();
+		List<ProductItemModel> productItems = new ArrayList<ProductItemModel>();
 		
 		for(int index = 1; index < itemsList.size(); index++) {
-			productItems.add(new ProductItem(
+			productItems.add(new ProductItemModel(
 				itemsList.get(index).findElement(By.className("s-item__link")).getText(),
 				itemsList.get(index).findElement(By.className("s-item__price")).getText()
 			));
 		}
 		return productItems;
-	}
+	}*/
 	
 	public void quitPage() {
 		currentDriver.close();
