@@ -1,5 +1,7 @@
 package pages;
 
+import helpers.FirefoxWebDriver;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.FindBy;
@@ -18,8 +20,8 @@ public class EbayHomePage extends Base{
 	@FindBy(id="gh-btn")
 	private WebElement searchButton;
 	
-	public EbayHomePage() throws IOException {
-		super();
+	public EbayHomePage(FirefoxWebDriver driver) throws IOException {
+		super(driver);
 		PageFactory.initElements(this.getDriver(), this);
 	}
 
@@ -36,20 +38,13 @@ public class EbayHomePage extends Base{
 	}
 
 	public String getHomePageTitle() {
-		return this.currentDriver.getTitle();
-	}
-	
-	private EbayHomePage typeSearchTerm(String text) {
-		searchTextBox.sendKeys(text);
-		return this;
-	}
-	
-	private EbayResultsPage clickOnSearchButton() {
-		searchButton.click();
-		return new EbayResultsPage(this.currentDriver, this.driverWait);
+		return this.getDriver().getTitle();
 	}
 
-	public EbayResultsPage searchItem(String text){
-		return typeSearchTerm(text).clickOnSearchButton();
+	public EbayResultsPage search(String searchTerm) throws IOException {
+		searchTextBox.sendKeys(searchTerm);
+		searchButton.click();
+		return new EbayResultsPage(this.driver, searchTerm);
 	}
+
 }

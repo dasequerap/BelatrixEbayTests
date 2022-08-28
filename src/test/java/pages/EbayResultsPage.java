@@ -1,30 +1,66 @@
 package pages;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import helpers.FirefoxWebDriver;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import models.ProductItemModel;
 
-public class EbayResultsPage{
-	private final WebDriver currentDriver;
-	private final WebDriverWait resultsPageWait;
+public class EbayResultsPage extends Base{
+	//private final WebDriver currentDriver;
+	//private final WebDriverWait resultsPageWait;
 	final String resultsLocatorTagXpath;
+	private String searchTerm;
+
+    @FindBy(css = "button[class = 'expand-btn expand-btn--small fake-menu-button__button']")
+    WebElement sortOptionsButton;
+
+    @FindBy(linkText = "Precio + Envío: más bajo primero")
+    WebElement descOptionButton;
+
+    @FindBy(linkText = "Precio + Envío: más alto primero")
+    WebElement ascOptionButton;
+
+    @FindBy(css = "h1[class = 'srp-controls__count-heading']")
+    WebElement resultNumberText;
+
+    @FindBy(css = "li.s-item")
+    List<WebElement> results;
 	
-	public EbayResultsPage(WebDriver driver, WebDriverWait wait) {
-		currentDriver = driver;
-		currentDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		resultsPageWait = wait;
+	public EbayResultsPage(FirefoxWebDriver driver, String searchTerm) throws IOException {
+		super(driver);
+		//currentDriver = driver;
+		//currentDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		//resultsPageWait = wait;
 		resultsLocatorTagXpath = "//li[contains(@id, 'srp-river-results-listing')]";
+		this.searchTerm = searchTerm;
+
+		PageFactory.initElements(this.getDriver(), this);
 	}
-	
-	public void selectPumaBrand() {
+
+	@Override
+	protected void load() {
+		this.waitPage();
+	}
+
+	@Override
+	protected void isLoaded() throws Error {
+		Assertions.assertTrue(this.getTitle().contains(searchTerm));
+	}
+
+	/*public void selectPumaBrand() {
+	    //Covered
 		WebElement pumaCheckBox = currentDriver.findElement(
 				By.xpath("//input[@aria-label='PUMA']"));
 		pumaCheckBox.click();
@@ -37,6 +73,7 @@ public class EbayResultsPage{
 	}
 	
 	public void clickSortResultsButton() {
+	    //covered
 		resultsPageWait.until(ExpectedConditions.elementToBeClickable(
 			By.xpath("//button[@aria-controls='w7']")));
 		currentDriver.findElement(By.xpath("//button[@aria-controls='w7']")).click();
@@ -59,7 +96,7 @@ public class EbayResultsPage{
 			By.className("srp-controls__count-heading")).getText();
 	}
 	
-	/*public List<ProductItemModel> getTopResults() {
+	public List<ProductItemModel> getTopResults() {
 		List<WebElement> itemsList = currentDriver.findElements(
 			By.xpath(resultsLocatorTagXpath));
 		List<ProductItemModel> productItems = new ArrayList<ProductItemModel>();
@@ -72,9 +109,4 @@ public class EbayResultsPage{
 		}
 		return productItems;
 	}*/
-	
-	public void quitPage() {
-		currentDriver.close();
-	}
-	
 }

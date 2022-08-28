@@ -1,39 +1,42 @@
 package tests;
 
 import java.io.IOException;
-import java.util.List;
 
+import helpers.FirefoxWebDriver;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import models.ProductItemModel;
 import pages.EbayHomePage;
 import pages.EbayResultsPage;
-import models.ProductItemModel;
 
 class EbayTests {
-	//static EbayHomePage ebayHomePage = null;
-	//EbayResultsPage ebayResultsPage = null;
+	static EbayHomePage ebayHomePage = null;
+	EbayResultsPage ebayResultsPage = null;
 	//List<ProductItemModel> results = null;
 	ProductItemModel productItem;
+	static FirefoxWebDriver driver;
 
 	@BeforeAll
 	static void setUp() throws IOException {
-		//ebayHomePage = new EbayHomePage();
+		driver = new FirefoxWebDriver();
+		driver.initDriver();
 	}
 
 	@Test
     @DisplayName("1. Ebay Test")
-	void automationExamTest() {
+	void automationExamTest() throws IOException {
+		ebayHomePage = new EbayHomePage(this.driver);
 		productItem = new ProductItemModel.ProductItemBuilder()
 				.name("puma")
 				.price("20000")
 				.build();
-		System.out.println(productItem.toString());
-		/*ebayHomePage.get();
-		ebayResultsPage = ebayHomePage.searchItem("Shoes");
-        ebayResultsPage.selectPumaBrand();
+
+		ebayHomePage.get();
+		ebayResultsPage = ebayHomePage.search("Shoes");
+        /*ebayResultsPage.selectPumaBrand();
 		ebayResultsPage.selectShoesSizeTen();
 		System.out.println(ebayResultsPage.getNumberOfResults());
 		ebayResultsPage.orderByPriceAscendant();
@@ -56,6 +59,6 @@ class EbayTests {
 	
 	@AfterAll
 	static void tearDown(){
-		//ebayHomePage.quit();
+		ebayHomePage.quit();
 	}
 }

@@ -2,17 +2,18 @@ package helpers;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class FirefoxWebdriver {
+public class FirefoxWebDriver {
 	FirefoxDriver driver;
 	
 	public void initDriver() {
 		driver = new FirefoxDriver();
 	}
 	
-	public FirefoxDriver getCurrentDriver() {
+	public WebDriver getCurrentDriver() {
 		return driver;
 	}
 	
@@ -23,11 +24,7 @@ public class FirefoxWebdriver {
 	public WebDriverWait getImplicitWait(Duration timeOut) {
 		return new WebDriverWait(driver, timeOut);
 	}
-	
-	public void waitPage(int timeOut) {
-		driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
-	}
-	
+
 	public void closeDriver() {
 		driver.close();
 	}
